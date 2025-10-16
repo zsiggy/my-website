@@ -1,15 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Frontend JavaScript loaded");
-  
-    // Example: simple alert when submitting form
-    const form = document.querySelector("form");
-    if (form) {
-      form.addEventListener("submit", (e) => {
+  // Handle contact form submission to backend
+  const contactForm = document.querySelector('form[action="/api/contact"]');
+  if (contactForm) {
+    contactForm.addEventListener("submit", async (e) => {
+      // Let the browser perform native validation first
+      if (!contactForm.checkValidity()) {
+        // Prevent submission so we can show native validation UI
         e.preventDefault();
-        alert("Form submitted! (not connected to backend yet)");
-      });
-    }
-  });
+        contactForm.reportValidity();
+        return;
+      }
+
+      e.preventDefault();
+      const statusEl = document.getElementById("form-status");
+      if (statusEl) {
+        statusEl.textContent = "Sending...";
+      }
+
+      try {
+        const formEntries = Object.fromEntries(new FormData(contactForm).entries());
+        const response = await fetch(contactForm.action, {
+          method: "POST",
+          headers: { 
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formEntries)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          if (statusEl) statusEl.textContent = data.message || "Thanks! Your message has been sent.";
+          contactForm.reset();
+        } else {
+          if (statusEl) statusEl.textContent = data.error || "Oops, there was an error!";
+        }
+      } catch (err) {
+        if (statusEl) statusEl.textContent = "Network error. Please try again.";
+      }
+    });
+  }
+
+  // Handle projects link smooth scroll
+  const projectsLink = document.querySelector('.projects-link');
+  if (projectsLink) {
+    projectsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  }
+
+  // Handle project header click to scroll to projects
+  const projectHeader = document.querySelector('#projects');
+  
+  if (projectHeader) {
+    projectHeader.addEventListener('click', () => {
+      projectHeader.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+});
   
   document.addEventListener("DOMContentLoaded", () => {
     const slides = document.querySelector(".slides");

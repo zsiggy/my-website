@@ -3,34 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with Zsiggy – portfolio contact page for collaborations, opportunities, and questions.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="/contact.html">
   <title>Contact | My Website</title>
   <link rel="stylesheet" href="style.css">
   <script defer src="main.js"></script>
+  <meta property="og:title" content="Contact | My Website">
+  <meta property="og:description" content="Reach out for collaborations, opportunities, and questions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/contact.html">
+  <meta name="twitter:card" content="summary">
 </head>
 <body>
     <header>
         <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" aria-current="page">Contact</a>
           </nav>
     </header>
     
   <main>
-    <h2>Get in Touch</h2>
-    <form action="https://formspree.io/f/mldpndlq" method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" placeholder="Your name" required>
-      <div></div>
-      <label>Email:</label>
-      <input type="email" name="email" placeholder="Your email" required>
-      <div></div>
-      <label>Message:</label><br>
-      <textarea name="message" placeholder="Your message" required></textarea>
-      <div></div>
-      <button type="submit">Send</button>
+    <h1>Get in Touch</h1>
+    <p>If you have a project in mind, want to collaborate, or just want to say hi, use the form below or email me directly.</p>
 
-    </form>
+    <section aria-labelledby="contact-info-heading">
+      <h2 id="contact-info-heading">Direct contact</h2>
+      <p>
+        Email: <a href="mailto:crzsigmond@gmail.com">crzsigmond@gmail.com</a>
+      </p>
+      <p>
+        Also find me on
+        <a href="https://www.linkedin.com/in/clara-zsigmond/" target="_blank" rel="noopener">LinkedIn</a>
+        and
+        <a href="https://github.com/zsiggy" target="_blank" rel="noopener">GitHub</a>.
+      </p>
+    </section>
+
+    <section aria-labelledby="contact-form-heading">
+      <h2 id="contact-form-heading">Send a message</h2>
+      <form action="/api/contact" method="POST" novalidate>
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" required>
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Your message" rows="6" minlength="10" required></textarea>
+        </div>
+
+        <!-- Honeypot field to reduce spam (recognized by Formspree) -->
+        <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+          <label for="extra-info">Leave this field empty</label>
+          <input id="extra-info" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit">Send</button>
+
+        <p role="status" aria-live="polite" id="form-status" style="margin-top: 0.5rem;"></p>
+      </form>
+    </section>
   </main>
 
   <footer>

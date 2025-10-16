@@ -32,9 +32,7 @@ body {
     color: white;
     text-align: center;
     padding: 1rem;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    margin-top: 2rem;
   }
   
 
@@ -46,6 +44,10 @@ body {
   }
   
   /* Global */
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -207,44 +209,163 @@ header {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+
+
+  /* Projects Section - Dark background extends to end of page */
+  .projects-section {
+    margin-top: 25vh; /* pushes projects down so only the title shows initially */
+    padding: 10vh 2rem 6rem 2rem; /* Large top padding to hide projects initially */
+    background: #262524; /* Dark grey background */
+    text-align: center;
+    min-height: 100vh; /* Ensure it extends to full viewport height */
+  }
+
+  .projects-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #ecf0f1; /* Light color for dark background */
+    font-weight: 600; /* Match About Me thickness */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .projects-section h2:hover {
+    color: #bdc3c7; /* Slightly darker on hover */
+  }
+
+  .projects-gallery {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+    padding: 1rem 0;
+  }
+
+  .project-item {
+    flex-shrink: 0;
+    width: 300px;
+    text-align: center;
+  }
+
+  .project-item a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: none;
+    border-radius: 0; /* Sharp 90-degree edges */
+  }
+
+  .project-item h3 {
+    margin: 1rem 0 0 0;
+    font-size: 1.2rem;
+    color: #ecf0f1; /* Light color for dark background */
+    font-weight: 400;
+    text-align: center;
+  }
   
   /* Contact Page */
-  .contact-container {
-    max-width: 500px;
-    margin: 5rem auto;
-    padding: 2rem;
+  main {
+    max-width: 720px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  main h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  main > p {
+    margin-bottom: 2rem;
+    color: #555;
+  }
+
+  section + section {
+    margin-top: 2.5rem;
+  }
+
+  /* Contact info */
+  [aria-labelledby="contact-info-heading"] a {
+    color: #0077cc;
+  }
+
+  /* Form */
+  form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  form > div label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  .contact-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .contact-container input,
-  .contact-container textarea {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid #d0d7de;
+    border-radius: 10px;
     font-size: 1rem;
+    color: #111;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  
-  .contact-container button {
-    padding: 0.75rem;
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 0 3px rgba(0,119,204,0.15);
+  }
+
+  button[type="submit"] {
+    appearance: none;
     border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
     background: #0077cc;
-    color: white;
-    border-radius: 8px;
-    font-size: 1rem;
+    color: #fff;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.2s ease-in-out, transform 0.05s ease-in-out;
+    width: max-content;
   }
-  
-  .contact-container button:hover {
+
+  button[type="submit"]:hover {
     background: #005fa3;
+  }
+
+  button[type="submit"]:active {
+    transform: translateY(1px);
+  }
+
+  /* Status message */
+  #form-status {
+    min-height: 1.25rem;
+    color: #0077cc;
+  }
+
+  /* Current page indicator */
+  a[aria-current="page"] {
+    color: #0077cc;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   
 
@@ -301,6 +422,29 @@ header {
     
     .slideshow .next {
         right: 10px;
+    }
+
+    /* Projects gallery mobile */
+    .projects-section {
+      padding: 2rem 1rem;
+    }
+
+    .projects-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .projects-gallery {
+      gap: 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .project-item {
+      width: 250px;
+    }
+
+    .project-image {
+      height: 150px;
     }
   
   }
